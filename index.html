@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+    <title>Responsive design</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="style.css" rel="stylesheet">
+    <link href="modal.css" rel="stylesheet">
+    <link href="checkbox.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>  
+</head>
+<body>
+  <header>
+      <h1>Kontakti</h1>
+  </header>
+  <div>
+    <!-- do not delete -->
+  </div>
+    <nav>
+        <button id="toggle">Dodaj kontakt</button>
+        <div id="add-contact-form">
+            <form>
+                <label class="form-label" for="fname">Ime*</label><br>
+                <input type="text" id="fname" name="fname" autofocus required><br>
+
+                <label class="form-label" for="lname">Priimek*</label><br>
+                <input type="text" id="lname" name="lname" required>
+                
+                <label class="form-label" for="phone">Telefonska številka*</label><br>
+                <input type="text" id="phone" name="phone1" required minlength="9" pattern="\d*">
+
+                <label class="form-label" for="email">Elektronska pošta</label><br>
+                <input type="text" id="email" name="email">
+
+                <label class="form-label" for="birthdate">Datum rojstva</label><br>
+                <input type="date" id="birthdate" name="birthdate">
+
+                <input id="contact-submit" type="button" value="Dodaj" >
+            </form>
+          </div>
+    </nav>
+
+    <article>
+        <!-- <input type="text" id="search-bar" name="search" placeholder="Iskanje..."> -->
+        <p id="favourites-display">
+            Priljubljeni kontakti:
+            <img src="src/icons/arrow.svg" class="" id="favourites-arrow" height="15" alt="">
+        </p>
+        <div id="favourites-content">
+            <table id="favourites-table">
+                <!-- Fills with localStorage with JS -->
+            </table>
+        </div>
+        <div id="contacts-display">
+          Vsi kontakti:
+          <img src="src/icons/arrow.svg" class="rotate-up" id="contacts-display-arrow" height="15" alt="">
+        </div>
+        <div id="contacts-content">
+            <table id="contacts-table">
+              <!-- Fills with localStorage with JS -->
+            </table>
+        </div>
+    </article>
+
+    <div id="id01" class="w3-modal">
+      <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+  
+        <div class="w3-center"><br>
+          <span id="modal-x-button" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Zapri">&times;</span>
+          <img src="src/icons/img.jpg" alt="Avatar" style="width:20%" class="w3-circle w3-margin-top">
+        </div>
+  
+        <form class="w3-container" action="/action_page.php">
+          <div class="w3-section">
+            <input id="modal-index" type="text" name="id">
+            <label><b>Ime</b></label>
+            <input id="modal-name" class="w3-input w3-border" type="text"  name="mname" required disabled>
+            <label><b>Priimek</b></label>
+            <input id="modal-surname" class="w3-input w3-border" type="text" name="msurname" required disabled>
+            <label><b>Telefonska številka</b></label>
+            <input id="modal-phone" class="w3-input w3-border" type="text" name="mphone" required disabled>
+            <label><b>Email</b></label>
+            <input id="modal-email" class="w3-input w3-border" type="text" name="memail" disabled>
+            <label><b>Rojstni dan</b></label>
+            <input id="modal-birthdate" class="w3-input w3-border" type="date" name="mbirthdate" disabled>
+            <label class="container"><b>Priljubljen kontakt</b>
+              <input id="modal-favourite" class="" type="checkbox" name="mfavourite" disabled>
+              <span class="checkmark"></span>
+            </label>
+            <button id="modal-submit-button" class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Shrani</button>
+          </div>
+        </form>
+
+        <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+          <button id="modal-delete-button" type="button" class="w3-button w3-red">Izbriši</button>
+          <button id="modal-edit-button"  type="button" class="w3-button w3-blue">Uredi</button>
+          <button id="modal-save-button"  type="button" class="w3-button w3-green" style="float: right;">Shrani</button>
+        </div>
+      </div>
+    </div>
+  <a>
+  <!-- do not delete -->
+  </a>
+  <footer>
+    <div style="float: left;">
+      by <a href="https://github.com/klemenpraznik" target="_blank">Klemen Praznik</a> 
+    </div>
+    <div style="float: right">
+      <a href="viri.html">Viri</a> 
+    </div>
+  </footer>
+</body>
+</html>
+
+
