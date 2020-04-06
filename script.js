@@ -11,7 +11,8 @@ $(document).ready(function(){
     if (parseInt(window.localStorage.getItem("favDisplay")) == 0){
         $("#favourites-content").hide();
     }
-    
+    $("#search-bar").val("");
+
     $("#modal-submit-button").hide();
     $("#modal-save-button").hide();
 
@@ -124,6 +125,17 @@ $(document).ready(function(){
         saveEditContact()
     })
     
+    $("#search-bar").bind('input keyup', function(){
+        var $this = $(this);
+        var delay = 400; // 2 seconds delay after last input
+    
+        clearTimeout($this.data('timer'));
+        $this.data('timer', setTimeout(function(){
+            $this.removeData('timer');
+            let search_value = $("#search-bar").val();
+            loadTable(search_value);
+        }, delay));
+    });
 })
 
 function saveEditContact(){
@@ -201,6 +213,7 @@ function contactDetails(index, event){
     $("#modal-email").val(contact["email"]);
     $("#modal-birthdate").val(contact["_birthdate"]);
     $("#modal-favourite").prop("checked", contact["favourite"]);
+    $("#modal-img").attr("href", "tel:" + contact["phone"]);
 }
 
 function domRemoveContact(element){
@@ -269,37 +282,49 @@ function validateModal(){
     return true;
 }
 
-function loadTable(){
+function loadTable(search_value = ""){
+    $("#contacts-not-found").hide();
+    $("#contacts-content tr").remove();
     if (localStorage.getItem("contacts") === null) {
         //...
     }
     else {
         const string = window.localStorage.getItem("contacts").toString();
         let array = JSON.parse(string);
+        let found = 0;
         array.forEach(contact => {
-            const table = document.querySelector("#contacts-table");
+            if ((search_value == "") ||
+                (contact["name"].toLowerCase().includes(search_value.toLowerCase())) ||
+                (contact["phone"].includes(search_value)) ||
+                (contact["surname"].toLowerCase().includes(search_value.toLowerCase()))){
+                found += 1;
+                const table = document.querySelector("#contacts-table");
 
-            //new row
-            const tr = document.createElement("tr");
-            table.appendChild(tr);
-
-            // add image
-            const td_image = document.createElement("td");
-            td_image.innerHTML = '<img src="src/icons/img.jpg" height="30" alt="">';
-            tr.appendChild(td_image);
-
-            //add surname
-            const td_name = document.createElement("td");
-            td_name.innerText = contact["name"] + " " + contact["surname"];
-            td_name.id = "contact-name";
-            tr.appendChild(td_name);
-
-            //add phone number
-            const td_phone = document.createElement("td");
-            td_phone.innerHTML = '<a href="tel:' + contact["phone"] + '">' + contact["phone"] + '</a>';
-            td_phone.id = "phone-number";
-            tr.appendChild(td_phone);
+                //new row
+                const tr = document.createElement("tr");
+                table.appendChild(tr);
+    
+                // add image
+                const td_image = document.createElement("td");
+                td_image.innerHTML = '<img src="src/icons/img.jpg" height="30" alt="">';
+                tr.appendChild(td_image);
+    
+                //add surname
+                const td_name = document.createElement("td");
+                td_name.innerText = contact["name"] + " " + contact["surname"];
+                td_name.id = "contact-name";
+                tr.appendChild(td_name);
+    
+                //add phone numberyyy
+                const td_phone = document.createElement("td");
+                td_phone.innerHTML = '<a href="tel:' + contact["phone"] + '">' + contact["phone"] + '</a>';
+                td_phone.id = "phone-number";
+                tr.appendChild(td_phone);
+            }      
         });
+        if (found == 0) {
+            $("#contacts-not-found").show();
+        }
         if (array.length >= 1){
             window.localStorage.setItem("maxId", parseInt(array[array.length - 1].id));
         }
@@ -384,4 +409,5 @@ function saveContact(contact){
         array.push(contact);
         window.localStorage.setItem("contacts", JSON.stringify(array));
     }
+    loadTable();
 }

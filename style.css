@@ -256,6 +256,14 @@ body {
       margin-top: 14px;
     }
 
+    #favourites-display, #contacts-display, #favourites-content, #contacts-content{
+      margin: 0px;
+    }
+
+    #contacts-display{
+      margin-top: 14px;
+    }
+
     footer{
       margin-top: 5px;
     }

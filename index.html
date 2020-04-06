@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-    <title>Responsive design</title>
+    <title>Kontakti</title>
+    <link rel="icon" href="src/icons/fav-ico.png" type="image/png" sizes="16x16"> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="style.css" rel="stylesheet">
@@ -40,7 +41,7 @@
     </nav>
 
     <article>
-        <!-- <input type="text" id="search-bar" name="search" placeholder="Iskanje..."> -->
+        <input type="text" id="search-bar" name="search" placeholder="Iskanje...">
         <p id="favourites-display">
             Priljubljeni kontakti:
             <img src="src/icons/arrow.svg" class="" id="favourites-arrow" height="15" alt="">
@@ -51,13 +52,14 @@
             </table>
         </div>
         <div id="contacts-display">
-          Vsi kontakti:
+          <a id="all-contacts">Vsi kontakti:</a>
           <img src="src/icons/arrow.svg" class="rotate-up" id="contacts-display-arrow" height="15" alt="">
         </div>
         <div id="contacts-content">
             <table id="contacts-table">
               <!-- Fills with localStorage with JS -->
             </table>
+            <a id="contacts-not-found">Noben kontakt ne ustreza iskanemu nizu</a>
         </div>
     </article>
 
@@ -66,9 +68,10 @@
   
         <div class="w3-center"><br>
           <span id="modal-x-button" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Zapri">&times;</span>
-          <img src="src/icons/img.jpg" alt="Avatar" style="width:20%" class="w3-circle w3-margin-top">
-        </div>
-  
+          <a id="modal-img">
+            <img src="src/icons/img.jpg" alt="Avatar" style="width:20%" class="w3-circle w3-margin-top">
+          </a>
+        </div><br>
         <form class="w3-container" action="/action_page.php">
           <div class="w3-section">
             <input id="modal-index" type="text" name="id">
